@@ -24,7 +24,12 @@ module ActiveAdmin
       end
 
       def stream_csv
-        stream_resource &active_admin_config.csv_builder.method(:build).to_proc.curry[self]
+        builder = active_admin_config.csv_builder
+        if Rails.env.development? || Rails.env.test?
+          render builder.build self, ''
+        else
+          stream_resource &builder.method(:build).to_proc.curry[self]
+        end
       end
 
     end
