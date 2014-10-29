@@ -20,16 +20,17 @@ module ActiveAdmin
       def stream_resource(&block)
         headers['X-Accel-Buffering'] = 'no'
         headers['Cache-Control'] = 'no-cache'
-        self.response_body = Enumerator.new &block
+
+        if Rails.env.development? || Rails.env.test?
+          self.response_body = block['']
+        else
+          self.response_body = Enumerator.new &block
+        end
       end
 
       def stream_csv
         builder = active_admin_config.csv_builder
-        if Rails.env.development? || Rails.env.test?
-          render builder.build self, ''
-        else
-          stream_resource &builder.method(:build).to_proc.curry[self]
-        end
+        stream_resource &builder.method(:build).to_proc.curry[self]
       end
 
     end

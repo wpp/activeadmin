@@ -51,6 +51,8 @@ module ActiveAdmin
         resource = view_context.send :apply_decorator, resource
         receiver << CSV.generate_line(build_row(resource, columns, options), options)
       end
+
+      receiver
     end
 
     def exec_columns(view_context = nil)
