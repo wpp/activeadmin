@@ -104,6 +104,9 @@ module ActiveAdmin
                                       :email,
                                       :to_s ]
 
+    # To make debugging easier, by default only stream in staging & production
+    setting :stream_in, ['production', 'staging']
+
     # == Deprecated Settings
 
     # (none currently)

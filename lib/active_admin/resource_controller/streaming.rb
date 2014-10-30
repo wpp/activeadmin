@@ -21,10 +21,12 @@ module ActiveAdmin
         headers['X-Accel-Buffering'] = 'no'
         headers['Cache-Control'] = 'no-cache'
 
-        if Rails.env.development? || Rails.env.test?
-          self.response_body = block['']
-        else
+        # To make debugging easier, by default only stream in staging/production
+        case Rails.env
+        when *ActiveAdmin.application.stream_in
           self.response_body = Enumerator.new &block
+        else
+          self.response_body = block['']
         end
       end
 
