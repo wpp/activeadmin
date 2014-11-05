@@ -2,10 +2,10 @@ source 'https://rubygems.org'
 
 gemspec
 
-require File.expand_path 'spec/support/detect_rails_version', File.dirname(__FILE__)
+#require File.expand_path 'spec/support/detect_rails_version', File.dirname(__FILE__)
 
-rails_version = detect_rails_version
-gem 'rails', rails_version
+#rails_version = detect_rails_version
+gem 'rails'#, rails_version
 
 # Optional dependencies
 gem 'cancan'
@@ -20,9 +20,13 @@ gem 'parallel_tests'
 # Debugging
 gem 'pry'                  # Easily debug from your console with `binding.pry`
 
+# Dependency management
+gem 'appraisal'
+
 group :development do
   # Debugging
-  gem 'better_errors'      # Web UI to debug exceptions. Go to /__better_errors to access the latest one
+  # Web UI to debug exceptions. Go to /__better_errors to access the latest one
+  gem 'better_errors',     RUBY_VERSION.start_with?('1') ? '< 2' : nil
   gem 'binding_of_caller'  # Retrieve the binding of a method's caller in MRI Ruby >= 1.9.2
 
   # Performance
