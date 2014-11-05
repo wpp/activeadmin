@@ -5,8 +5,9 @@ ENV['BUNDLE_GEMFILE'] = File.expand_path('../../Gemfile', __FILE__)
 require "bundler"
 Bundler.setup
 
-require 'detect_rails_version'
-ENV['RAILS'] = detect_rails_version
+require "rails/version"
+
+ENV['RAILS'] = Rails::VERSION::STRING
 
 require 'simplecov'
 
