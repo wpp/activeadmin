@@ -64,7 +64,7 @@ module ActiveAdmin
       def add_default_new_action_item
         add_action_item :new, only: :index do
           if controller.action_methods.include?('new') && authorized?(ActiveAdmin::Auth::CREATE, active_admin_config.resource_class)
-            link_to I18n.t('active_admin.new_model', model:(controller.instance_variable_get(:@resource_label) || active_admin_config.resource_label)), new_resource_path
+            link_to I18n.t('active_admin.new_model', model: (controller.instance_variable_get(:@resource_label) || active_admin_config.resource_label)), new_resource_path
           end
         end
       end
