@@ -32,7 +32,7 @@ module ActiveAdmin
             end
 
             if active_admin_namespace.favicon
-              text_node(favicon_link_tag(active_admin_namespace.favicon))
+              text_node(favicon_link_tag(render_or_call_method_or_proc_on(self, active_admin_namespace.favicon)))
             end
 
             active_admin_namespace.meta_tags.each do |name, content|
